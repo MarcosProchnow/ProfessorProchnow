@@ -113,24 +113,31 @@
   }
 
   /* CONTEUDO */
-  .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
   .content-card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.5rem;
-    display: flex; flex-direction: column;
+    border-radius: 12px; padding: 1.75rem;
+    display: flex; flex-direction: column; gap: 0;
     transition: border-color 0.2s; text-decoration: none; color: inherit;
+    min-height: 200px;
   }
   .content-card:hover { border-color: rgba(59,130,246,0.4); }
   .content-badge {
     display: inline-block; border-radius: 6px; font-size: 0.7rem;
-    font-weight: 600; padding: 3px 8px; margin-bottom: 1rem;
-    letter-spacing: 0.05em; text-transform: uppercase;
+    font-weight: 700; padding: 4px 10px; margin-bottom: 1.25rem;
+    letter-spacing: 0.08em; text-transform: uppercase; width: fit-content;
   }
   .badge-youtube { background: rgba(220,38,38,0.15); color: #f87171; border: 1px solid rgba(220,38,38,0.25); }
   .badge-udemy { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
-  .content-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
-  .content-card p { color: var(--muted); font-size: 0.875rem; flex: 1; }
-  .content-link { color: var(--accent2); font-size: 0.8rem; margin-top: 1rem; display: flex; align-items: center; gap: 4px; }
+  .content-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .content-card p { color: var(--muted); font-size: 0.875rem; flex: 1; line-height: 1.7; }
+  .content-link {
+    color: var(--accent2); font-size: 0.85rem; margin-top: 1.25rem;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 500;
+  }
+  .content-link svg { width: 14px; height: 14px; }
+  @media (max-width: 640px) { .content-grid { grid-template-columns: 1fr; } }
 
   /* CONTATO */
   .contact-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -252,14 +259,16 @@
           </div>
           <span class="titem-period">2022 – Atual</span>
         </div>
-        <p>Disciplinas: MLOps e IA como Serviço (Pós-Graduação Data Science & ML com IA) · Funções e Ponteiros (Graduação em Ciência de Dados).</p>
-        <p style="margin-top:0.4rem">Orientação de Projetos Aplicados: Data Science & ML com IA, MBA em Desenvolvimento Full Stack, Front End e Arquitetura de Software — além de todos os cursos de Graduação.</p>
+        <p><strong style="color:var(--text)">Projetos Aplicados (foco principal):</strong> cada aluno recebe um desafio real e precisa propor uma solução concreta, colocando em prática os conhecimentos adquiridos no curso. O resultado é sempre um produto ou MVP funcional, desenvolvido do problema à entrega.</p>
+        <p style="margin-top:0.75rem">Cursos orientados: Pós-Graduação Data Science e Machine Learning com IA, MBA em Desenvolvimento Full Stack, Front End e Arquitetura de Software, além de todos os cursos de Graduação em Ciência de Dados, Sistemas de Informação, Análise e Desenvolvimento de Sistemas, Banco de Dados e Defesa Cibernética.</p>
+        <p style="margin-top:0.75rem"><strong style="color:var(--text)">Disciplinas ministradas:</strong> MLOps e IA como Serviço (Pós-Graduação) · Funções e Ponteiros (Graduação em Ciência de Dados).</p>
         <div class="tags">
+          <span class="tag">Projetos Aplicados</span>
+          <span class="tag">MVP</span>
           <span class="tag">Ciência de Dados</span>
           <span class="tag">Machine Learning</span>
           <span class="tag">MLOps</span>
           <span class="tag">EAD</span>
-          <span class="tag">Orientação de TCC</span>
         </div>
       </div>
 
@@ -353,7 +362,7 @@
       <a class="content-card" href="https://www.udemy.com/user/marcos-prochnow/" target="_blank" rel="noopener">
         <span class="content-badge badge-udemy">Udemy</span>
         <h3>Cursos na Udemy</h3>
-        <p>Mais de 399 alunos matriculados. Cursos práticos com foco em desenvolvimento de software e tecnologia aplicada.</p>
+        <p>Mais de 399 alunos matriculados em cursos práticos com foco em desenvolvimento de software e tecnologia aplicada.</p>
         <span class="content-link">
           Ver cursos
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
