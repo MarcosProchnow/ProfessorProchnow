@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professor Marcos Prochnow</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --card-bg: #1e2535;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(15,17,23,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-weight: 700; font-size: 1rem; color: var(--accent2); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 100px 2rem 4rem;
+    background: radial-gradient(ellipse at 60% 50%, rgba(59,130,246,0.07) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 4rem; }
+  .hero-photo {
+    width: 180px; height: 180px; border-radius: 50%; flex-shrink: 0;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+    box-shadow: 0 0 40px rgba(59,130,246,0.2);
+  }
+  .hero-tag {
+    display: inline-block; background: rgba(59,130,246,0.15); color: var(--accent2);
+    border: 1px solid rgba(59,130,246,0.3); border-radius: 20px;
+    font-size: 0.8rem; padding: 4px 14px; margin-bottom: 1rem; letter-spacing: 0.05em;
+  }
+  .hero h1 { font-size: 2.6rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+  .hero h1 span { color: var(--accent2); }
+  .hero-sub { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.5rem; max-width: 480px; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .btn-primary:hover { background: #2563eb; }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* STATS */
+  .stats { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.5rem 2rem; }
+  .stats-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-n { font-size: 2rem; font-weight: 700; color: var(--accent2); display: block; }
+  .stat-l { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 0.75rem; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .section-desc { color: var(--muted); max-width: 540px; margin-bottom: 3rem; font-size: 0.95rem; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* CARDS GRADE */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(59,130,246,0.35); }
+  .card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .card p { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+
+  /* EXPERIENCIA */
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: var(--border); }
+  .titem { position: relative; margin-bottom: 2.5rem; }
+  .titem::before {
+    content: ''; position: absolute; left: -1.85rem; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+  }
+  .titem-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+  .titem h3 { font-size: 1rem; font-weight: 600; }
+  .titem-company { color: var(--accent2); font-size: 0.875rem; }
+  .titem-period { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+  .titem p { color: var(--muted); font-size: 0.875rem; margin-top: 0.4rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag {
+    background: rgba(59,130,246,0.1); color: var(--accent2);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 20px; font-size: 0.75rem; padding: 3px 10px;
+  }
+
+  /* CONTEUDO */
+  .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .content-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s; text-decoration: none; color: inherit;
+  }
+  .content-card:hover { border-color: rgba(59,130,246,0.4); }
+  .content-badge {
+    display: inline-block; border-radius: 6px; font-size: 0.7rem;
+    font-weight: 600; padding: 3px 8px; margin-bottom: 1rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .badge-youtube { background: rgba(220,38,38,0.15); color: #f87171; border: 1px solid rgba(220,38,38,0.25); }
+  .badge-udemy { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
+  .content-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .content-card p { color: var(--muted); font-size: 0.875rem; flex: 1; }
+  .content-link { color: var(--accent2); font-size: 0.8rem; margin-top: 1rem; display: flex; align-items: center; gap: 4px; }
+
+  /* CONTATO */
+  .contact-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; border-radius: 8px; text-decoration: none;
+    font-size: 0.875rem; font-weight: 500; transition: all 0.2s;
+    border: 1px solid var(--border); color: var(--text); background: var(--card-bg);
+  }
+  .contact-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .contact-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    text-align: center; padding: 2rem;
+    color: var(--muted); font-size: 0.8rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero-inner { flex-direction: column; gap: 2rem; text-align: center; }
+    .hero h1 { font-size: 1.8rem; }
+    .hero-sub { margin: 0 auto 1.5rem; }
+    .hero-btns { justify-content: center; }
+    .hero-photo { width: 130px; height: 130px; }
+    .stats-inner { gap: 2rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Prof. Prochnow</span>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#atuacao">Atuação</a></li>
+    <li><a href="#experiencia">Experiência</a></li>
+    <li><a href="#conteudo">Conteúdo</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <img class="hero-photo"
+      src="https://media.licdn.com/dms/image/v2/D4D03AQFv73d7LdnqLA/profile-displayphoto-scale_400_400/B4DZnGtRYMJEAg-/0/1759975382260?e=1782950400&v=beta&t=Vmb9u5trHFUGfO4zitz4NXpWJEJbH7AXHfjEujqNgDc"
+      alt="Marcos Prochnow">
+    <div>
+      <span class="hero-tag">Professor Universitário · Tutor EAD · Orientador</span>
+      <h1>Marcos <span>Prochnow</span></h1>
+      <p class="hero-sub">Docência em Ciência de Dados, Machine Learning e Engenharia de Software, unindo academia e mercado de tecnologia.</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#conteudo">Ver conteúdo</a>
+        <a class="btn btn-outline" href="#contato">Entrar em contato</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Anos de docência</span></div>
+    <div class="stat"><span class="stat-n">399</span><span class="stat-l">Alunos na Udemy</span></div>
+    <div class="stat"><span class="stat-n">MBA+</span><span class="stat-l">Bancas avaliadas</span></div>
+    <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Remoto</span></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <p class="section-label">Sobre</p>
+    <h2 class="section-title">Tecnologia e educação na prática</h2>
+    <p class="section-desc">Professor universitário com atuação ativa no mercado de desenvolvimento de software, o que permite trazer casos reais para a sala de aula.</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3>Educação a Distância</h3>
+        <p>Experiência consolidada em AVAs, tutoria ativa, mediação pedagógica e feedback formativo em cursos de graduação e pós-graduação.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Ciência de Dados e IA</h3>
+        <p>Docência em Machine Learning, MLOps, IA como Serviço e Data Science, com projetos aplicados e orientação de TCC.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Engenharia de Software</h3>
+        <p>Atuação profissional com GeneXus, SQL Server, C#, Go e APIs — experiência real aplicada diretamente no ensino.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧭</div>
+        <h3>Orientação Acadêmica</h3>
+        <p>Orientador de Projetos Aplicados e participante de bancas em MBAs de Arquitetura de Software, Data Science, Full Stack e Gestão Ágil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ATUACAO -->
+<section id="atuacao">
+  <div class="section-inner">
+    <p class="section-label">Atuação Acadêmica</p>
+    <h2 class="section-title">Onde e o que ensino</h2>
+    <p class="section-desc">Cursos e disciplinas em que atuo como professor, orientador ou tutor.</p>
+
+    <div class="timeline">
+
+      <div class="titem">
+        <div class="titem-header">
+          <div>
+            <h3>Professor Universitário · Orientador · Tutor EAD</h3>
+            <span class="titem-company">XP Educação / IGTI</span>
+          </div>
+          <span class="titem-period">2022 – Atual</span>
+        </div>
+        <p>Disciplinas: MLOps e IA como Serviço (Pós-Graduação Data Science & ML com IA) · Funções e Ponteiros (Graduação em Ciência de Dados).</p>
+        <p style="margin-top:0.4rem">Orientação de Projetos Aplicados: Data Science & ML com IA, MBA em Desenvolvimento Full Stack, Front End e Arquitetura de Software — além de todos os cursos de Graduação.</p>
+        <div class="tags">
+          <span class="tag">Ciência de Dados</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">MLOps</span>
+          <span class="tag">EAD</span>
+          <span class="tag">Orientação de TCC</span>
+        </div>
+      </div>
+
+      <div class="titem">
+        <div class="titem-header">
+          <div>
+            <h3>Tutor a Distância</h3>
+            <span class="titem-company">DOT Digital Group</span>
+          </div>
+          <span class="titem-period">fev/2026 – Atual</span>
+        </div>
+        <p>Tutoria em curso Técnico em Agropecuária — UC02 Informação. Mediação pedagógica, acompanhamento de estudantes e feedbacks formativos em AVA.</p>
+        <div class="tags">
+          <span class="tag">Tutoria EAD</span>
+          <span class="tag">AVA</span>
+          <span class="tag">Formação Profissional</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="section-inner">
+    <p class="section-label">Mercado</p>
+    <h2 class="section-title">Experiência profissional</h2>
+    <p class="section-desc">Atuação ativa no mercado de tecnologia, que enriquece diretamente o ensino com casos reais.</p>
+
+    <div class="timeline">
+      <div class="titem">
+        <div class="titem-header">
+          <div>
+            <h3>Desenvolvedor de Software</h3>
+            <span class="titem-company">Dealernet</span>
+          </div>
+          <span class="titem-period">2021 – Atual</span>
+        </div>
+        <p>Desenvolvimento e manutenção de sistemas ERP/DMS automotivos com GeneXus, SQL Server, C# e PowerBuilder. Integrações via APIs REST e SOAP.</p>
+        <div class="tags">
+          <span class="tag">GeneXus</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">C#</span>
+          <span class="tag">Go</span>
+          <span class="tag">APIs REST</span>
+        </div>
+      </div>
+
+      <div class="titem">
+        <div class="titem-header">
+          <div>
+            <h3>Gestor de TI · Gerente Comercial</h3>
+            <span class="titem-company">Tropical Veículos</span>
+          </div>
+          <span class="titem-period">2014 – 2021</span>
+        </div>
+        <p>Gestão de infraestrutura, administração de ERP/DMS e SQL Server. Liderança comercial orientada a dados.</p>
+        <div class="tags">
+          <span class="tag">SQL Server</span>
+          <span class="tag">ERP/DMS</span>
+          <span class="tag">Gestão de TI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTEUDO -->
+<section id="conteudo">
+  <div class="section-inner">
+    <p class="section-label">Conteúdo</p>
+    <h2 class="section-title">Canal e cursos</h2>
+    <p class="section-desc">Conteúdo de tecnologia e desenvolvimento disponível no YouTube e na Udemy.</p>
+    <div class="content-grid">
+
+      <a class="content-card" href="https://www.youtube.com/ProfessorProchnowTI" target="_blank" rel="noopener">
+        <span class="content-badge badge-youtube">YouTube</span>
+        <h3>Professor Prochnow TI</h3>
+        <p>Canal com conteúdo sobre desenvolvimento de software, banco de dados e tecnologia para o dia a dia do profissional de TI.</p>
+        <span class="content-link">
+          Acessar canal
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+      <a class="content-card" href="https://www.udemy.com/user/marcos-prochnow/" target="_blank" rel="noopener">
+        <span class="content-badge badge-udemy">Udemy</span>
+        <h3>Cursos na Udemy</h3>
+        <p>Mais de 399 alunos matriculados. Cursos práticos com foco em desenvolvimento de software e tecnologia aplicada.</p>
+        <span class="content-link">
+          Ver cursos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-inner">
+    <p class="section-label">Contato</p>
+    <h2 class="section-title">Vamos conversar?</h2>
+    <p class="section-desc">Aberto a oportunidades de docência, orientação, parcerias acadêmicas e produção de conteúdo.</p>
+    <div class="contact-grid">
+
+      <a class="contact-btn" href="https://www.linkedin.com/in/marcosprochnow" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+
+      <a class="contact-btn" href="mailto:marcosprochnow@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        E-mail
+      </a>
+
+      <a class="contact-btn" href="https://github.com/marcosprochnow" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+
+      <a class="contact-btn" href="http://lattes.cnpq.br/7309703870357775" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Lattes
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Marcos Prochnow · Feito com HTML puro · <a href="https://github.com/MarcosProchnow/ProfessorProchnow" style="color: var(--accent2); text-decoration: none;">Ver código no GitHub</a></p>
+</footer>
+
+</body>
+</html>
